@@ -1,0 +1,32 @@
+GAL16V8   ; Super Video Clock Divider
+SVIDEO    ; 
+
+
+Clock CIN  CLKIN  NC    NC     R    G     B    I    GND
+/OE   BLUE BLUEI  GREEN GREENI RED  REDI  CLK  COUT VCC
+
+
+COUT = !CIN
+
+CLK = !CLKIN
+
+RED = R
+REDI = R * I +
+       /G * /B * I
+GREEN = /R * G +
+        G * B +
+        G * I            
+GREENI = G * I +
+         R * G * /B +
+         /R * /B * I
+BLUE    = B
+BLUEI   = B * I +
+          /R * /G * I
+
+
+DESCRIPTION
+
+This combines a 4-to-six bit DAC (with CGA "brown fix) along
+with a couple inverters that can be used along with a 4x NTSC
+crystal to provide a clock for the connected AD724. If you're 
+using a can oscillator or 1x NTSC crystal these are optional
